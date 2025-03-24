@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pose-format-snippets"
+version = "0.1.0"
+description = "A collection of utilities for working with pose-format data"
+authors = [{ name = "Your Name", email = "your.email@example.com" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = ["pose_format", "pyzstd", "gdown"]
+
+[project.optional-dependencies]
+dev = ["black", "pylint", "pytest"]
+
+[tool.setuptools]
+packages = [
+    "pose_format_snippets",
+    "pose_format_snippets.colab",
+    "pose_format_snippets.gdrive",
+]
+
+[tool.black]
+line-length = 120
+target-version = ['py37', 'py38', 'py39', 'py310', 'py311']
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = [
+    "missing-module-docstring",   # Don't require module-level docstrings
+    "missing-class-docstring",    # Don't require class-level docstrings
+    "missing-function-docstring", # Don't require function-level docstrings
+    "too-few-public-methods",     # Allow small utility classes
+    "invalid-name",               # Allow single-letter variables like i, x
+    "import-error",               # Avoid issues with dynamic imports in editable installs
+]
+
+[tool.pylint.BASIC]
+good-names = ["i", "j", "k", "x", "y", "z", "_"]
+
+[tool.pylint.FORMAT]
+max-line-length = 120
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
